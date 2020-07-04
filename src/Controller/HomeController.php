@@ -2,27 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController {
 
+
     /**
      * @Route("/", name="home")
+     * @param ArticleRepository $articleRepository
+     * @return Response
      */
-    public function home(){ // 每个方法都对应着一个url
-        $em = $this->getDoctrine()->getManager();
-        $article = new Article();
-        $article->setTitle('un titre');
-        $article->setDescription('une description');
-        $article->setImage('une image');
-        $article->setPublished(1);
-        $em->persist($article);
-        $em->flush();
+    public function home(ArticleRepository $articleRepository){ // 每个方法都对应着一个url
+
         return $this->render('index.html.twig', [
-            'article' => $article
+            "articles" => $articleRepository->findBy(["published" => 1])
         ]);
     }
 

@@ -6,22 +6,8 @@
     <h1>Ajouter un article</h1>
 
     {{ form_start(form) }}
-        <div class="form-group">
-            {{ form_label(form.title) }}
-            {{ form_widget(form.title) }}
-        </div>
-        <div class="form-group">
-            {{ form_label(form.description) }}
-            {{ form_widget(form.description) }}
-        </div>
-        <div class="form-group">
-            {{ form_label(form.published) }}
-            {{ form_widget(form.published) }}
-        </div>
-        <div class="form-group">
-            {{ form_label(form.image) }}
-            {{ form_widget(form.image) }}
-        </div>
+
+        {{ include('article/_form.html.twig') }}
         <button class="btn btn-primary">
             Ajouter
         </button>
